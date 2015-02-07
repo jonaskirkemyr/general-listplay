@@ -31,7 +31,6 @@ void DataNode<T>::increase()
 
 
 //public
-
 template <typename T>
 DataNode<T>::DataNode(T elem,int max,int inc) : INCREASE(inc)
 {
@@ -51,6 +50,19 @@ DataNode<T>::DataNode(int size) : INCREASE(size)
 {
 	initData(size);
 }
+
+template <typename T>
+DataNode<T>::DataNode(const DataNode& cpy) : INCREASE(cpy.INCREASE)
+{
+	size=cpy.size;
+	max_size=cpy.max_size;
+	
+	data=new T[max_size];
+
+	for(int i=0;i<++size;++i)
+		data[i]=cpy.data[i];
+}
+
 
 template <typename T>
 DataNode<T>::~DataNode()

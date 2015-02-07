@@ -10,6 +10,9 @@ class NodePlay
 		void createNodes(int=5);
 	public:
 		NodePlay(int=5);//#node to create
+		NodePlay(const NodePlay&);
+
+		virtual ~NodePlay();//if to be extended
 
 		bool isCircular();
 

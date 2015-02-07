@@ -19,6 +19,23 @@ NodePlay::NodePlay(int numb)
 	createNodes(numb);
 }
 
+NodePlay::NodePlay(const NodePlay & cpy)
+{
+	if(cpy.head==nullptr)
+		return;
+
+	Node *current=cpy.head;
+	head=new Node(current->getId());
+	Node *temp=head;
+
+	while(current!=nullptr)
+	{
+		temp->setNext(new Node(current->getNext()->getId()));
+		temp=temp->getNext();
+		current=current->getNext();
+	}
+}
+
 bool NodePlay::isCircular()
 {
 	Node * current=head;

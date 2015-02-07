@@ -6,6 +6,12 @@ Node::Node(int id)
 	next=nullptr;
 }
 
+Node::Node(const Node & cpy)
+{
+	id=cpy.id;
+	next=new Node(id);
+}
+
 Node::~Node()
 {
 	delete next;
