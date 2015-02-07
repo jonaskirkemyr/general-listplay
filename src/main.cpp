@@ -6,14 +6,15 @@ using namespace std;
 
 int main()
 {
-	NodePlay nodeplay;
+	NodePlay nodeplay(1537);
 
 	
 	nodeplay.print();
 	nodeplay.reverse();
 	nodeplay.print();
 
-	nodeplay.remove(2);
+	nodeplay.remove(9999);
+	nodeplay.remove(-1);
 	nodeplay.print();
 
 	nodeplay.add(6,2);

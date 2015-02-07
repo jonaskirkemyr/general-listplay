@@ -79,7 +79,7 @@ bool NodePlay::remove(int pos)
 		current=current->getNext();
 	}
 
-	if(current==nullptr)//no node at pos 
+	if(current==nullptr)//no node at pos (if head is nullptr)
 		return false;
 
 	Node *next=current->getNext();
@@ -95,9 +95,7 @@ bool NodePlay::remove(int pos)
 			return false;//no more elements
 		head->setNext(next->getNext());
 	}
-
 	return true;
-
 }
 
 void NodePlay::removeAll()
