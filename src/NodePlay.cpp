@@ -40,13 +40,14 @@ void NodePlay::makeCircular()
 void NodePlay::print()
 {
 	Node *current=head;
-	std::cout<<"Nodes:\n";
+	std::cout<<"\nNodes:\n";
 
 	while(current!=nullptr)
 	{
 		std::cout<<"\tid: "<<current->getId()<<std::endl;
 		current=current->getNext();
 	}
+	std::cout<<"End nodes\n\n";
 }
 
 void NodePlay::reverse()
@@ -66,3 +67,81 @@ void NodePlay::reverse()
 	}
 	head=previous;
 }
+
+
+bool NodePlay::remove(int pos)
+{
+	Node *current=head;
+	Node *prev=nullptr;
+	for(int i=0;i<pos && current!=nullptr;++i)//by checking current not nullptr, del last element instead
+	{
+		prev=current;
+		current=current->getNext();
+	}
+
+	if(current==nullptr)//no node at pos 
+		return false;
+
+	Node *next=current->getNext();
+	
+	delete current;
+
+	if(prev!=nullptr)
+		prev->setNext(next);
+	else//pos==0
+	{
+		head=next;
+		if(next==nullptr)
+			return false;//no more elements
+		head->setNext(next->getNext());
+	}
+
+	return true;
+
+}
+
+void NodePlay::removeAll()
+{
+	while(remove(0));
+}
+
+
+bool NodePlay::add(int id,int pos)
+{
+	Node *current=head;
+	Node *prev=nullptr;
+	
+	for(int i=0;i<pos && current!=nullptr;++i)//by checking current!=null, add at end of list
+	{
+		prev=current;
+		current=current->getNext();
+	}
+
+	if(prev==nullptr)//check if head needs to be changed
+		addFront(id);
+	else
+	{
+		prev->setNext(new Node(id));
+		prev->getNext()->setNext(current);
+	}
+	//this->print();
+	
+	return true;
+}
+
+bool NodePlay::add(int *numbers,int *pos,int size)
+{
+	for(int i=0;i<size;++i)
+		if(!this->add(numbers[i],pos[i]))
+			return false;
+	return true;
+}
+
+void NodePlay::addFront(int id)
+{
+	Node *temp=new Node(id);
+	temp->setNext(head);
+	head=temp;
+}
+
+
