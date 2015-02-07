@@ -6,6 +6,12 @@ Node::Node(int id)
 	next=nullptr;
 }
 
+Node::~Node()
+{
+	delete next;
+	next=nullptr;
+}
+
 void Node::setNext(Node *next)
 {
 	this->next=next;

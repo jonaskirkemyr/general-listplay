@@ -20,7 +20,7 @@ class DataNode : public Node
 		DataNode(T,int=5,int=10);//element,max_size, increase with
 		DataNode(T *,int);//elements, numb
 		DataNode(int);//numb
-
+		virtual ~DataNode();
 
 		const T& getData(int=0) const;
 		int getSize();

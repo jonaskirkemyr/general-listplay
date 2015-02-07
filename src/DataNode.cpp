@@ -52,6 +52,13 @@ DataNode<T>::DataNode(int size) : INCREASE(size)
 	initData(size);
 }
 
+template <typename T>
+DataNode<T>::~DataNode()
+{
+	delete[] data;
+	data=nullptr;
+}
+
 
 
 
