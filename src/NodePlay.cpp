@@ -13,10 +13,11 @@ void NodePlay::createNodes(int numb)
 
 
 //public
-NodePlay::NodePlay(int numb)
+NodePlay::NodePlay(int numb,bool create)
 {
 	head=new Node(0);
-	createNodes(numb);
+	if(create)
+		createNodes(numb);
 }
 
 NodePlay::NodePlay(const NodePlay & cpy)
@@ -28,11 +29,27 @@ NodePlay::NodePlay(const NodePlay & cpy)
 	head=new Node(current->getId());
 	Node *temp=head;
 
-	while(current!=nullptr)
+	while(current!=nullptr) 
 	{
 		temp->setNext(new Node(current->getNext()->getId()));
 		temp=temp->getNext();
 		current=current->getNext();
+	}
+}
+
+NodePlay::~NodePlay()
+{
+	while(head!=nullptr)
+	{
+		Node *temp=head->getNext();
+	
+		delete head;
+		if(head==temp)//if circular
+		{
+			head=nullptr;
+			break;
+		}
+		head=temp;
 	}
 }
 
@@ -139,7 +156,6 @@ bool NodePlay::add(int id,int pos)
 		prev->setNext(new Node(id));
 		prev->getNext()->setNext(current);
 	}
-	//this->print();
 	
 	return true;
 }
@@ -152,6 +168,24 @@ bool NodePlay::add(int *numbers,int *pos,int size)
 	return true;
 }
 
+bool NodePlay::add(Node & a)
+{
+	if(head==nullptr)
+	{
+		head=new Node(a);
+		return true;
+	}
+	Node *current=head;
+	Node *prev=nullptr;
+
+	while((current->getNext())!=nullptr)
+		current=current->getNext();
+	
+	current->setNext(&a);
+	return true;
+}
+
+
 void NodePlay::addFront(int id)
 {
 	Node *temp=new Node(id);
@@ -160,3 +194,11 @@ void NodePlay::addFront(int id)
 }
 
 
+const Node& NodePlay::getNode(int pos) const
+{
+	Node *current=head;	
+	for(int i=0;i<pos && current!=nullptr;++i)//by checking current!=null, add at end of list
+		current=current->getNext();
+	return *current;
+	
+}

@@ -1,7 +1,7 @@
 #ifndef DATANODE_H
 #define DATANODE_H
 
-#include "Node.h"
+//#include "Node.h"
 
 template <typename T>
 class DataNode : public Node
@@ -17,13 +17,16 @@ class DataNode : public Node
 		void increase();
 
 	public:
-		DataNode(T,int=5,int=10);//element,max_size, increase with
+
+		DataNode(int=5,int=10);//element,max_size, increase with
 		DataNode(T *,int);//elements, numb
 		DataNode(int);//numb
-		DataNode(const DataNode&);
+		DataNode(const DataNode<T>&);
+
 		virtual ~DataNode();
 
 		const T& getData(int=0) const;
+		T& getData(int=0);
 		int getSize();
 
 		void add(const T&);
@@ -32,4 +35,5 @@ class DataNode : public Node
 
 };
 
+#include "DataNode.cpp"
 #endif

@@ -9,10 +9,10 @@ class NodePlay
 		Node *head;
 		void createNodes(int=5);
 	public:
-		NodePlay(int=5);//#node to create
+		NodePlay(int=5,bool=true);//#node to create
 		NodePlay(const NodePlay&);
 
-		virtual ~NodePlay();//if to be extended
+		~NodePlay();//if to be extended
 
 		bool isCircular();
 
@@ -27,7 +27,10 @@ class NodePlay
 
 		bool add(int,int);//id,pos
 		bool add(int *,int*,int);//array of ids,array of pos,size
+		bool add(Node& );
 		void addFront(int);//id
+
+		const Node & getNode(int) const;//pos
 
 		
 };

@@ -9,6 +9,7 @@ class Node
 	public:
 		Node(int);
 		Node(const Node&);
+
 		virtual ~Node();
 
 		int getId();

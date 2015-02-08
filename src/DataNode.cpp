@@ -1,5 +1,4 @@
-#include "DataNode.h"
-
+#ifdef DATANODE_H
 
 //private
 template <typename T>
@@ -32,13 +31,13 @@ void DataNode<T>::increase()
 
 //public
 template <typename T>
-DataNode<T>::DataNode(T elem,int max,int inc) : INCREASE(inc)
+DataNode<T>::DataNode(int max,int inc) : Node(1337),INCREASE(inc)
 {
-	initData(max);
+	this->initData(max);
 }
 
 template <typename T>
-DataNode<T>::DataNode(T* elems,int size) : INCREASE(size)
+DataNode<T>::DataNode(T* elems,int size) : Node(0),INCREASE(size)
 {
 	initData(size);
 	for(int i=0;i<size;++i)
@@ -46,13 +45,13 @@ DataNode<T>::DataNode(T* elems,int size) : INCREASE(size)
 }
 
 template <typename T>
-DataNode<T>::DataNode(int size) : INCREASE(size)
+DataNode<T>::DataNode(int size) : Node(1337),INCREASE(size)
 {
 	initData(size);
 }
 
 template <typename T>
-DataNode<T>::DataNode(const DataNode& cpy) : INCREASE(cpy.INCREASE)
+DataNode<T>::DataNode(const DataNode<T>& cpy) : id(cpy.id), INCREASE(cpy.INCREASE)
 {
 	size=cpy.size;
 	max_size=cpy.max_size;
@@ -69,7 +68,7 @@ DataNode<T>::~DataNode()
 {
 	delete[] data;
 	data=nullptr;
-}
+} 
 
 
 
@@ -77,17 +76,28 @@ DataNode<T>::~DataNode()
 template<typename T>
 const T& DataNode<T>::getData(int pos) const
 {
-	if(pos>=0 && pos<size)//make sure retrieving from pos that exists
-		return data[pos];
-	return nullptr;
+	if(pos<0 || pos>=size)//make sure retrieving from pos that exists
+		pos=0;
+	return data[pos];
+	 
+}
+
+template<typename T>
+T& DataNode<T>::getData(int pos)
+{
+	if(pos<0 || pos>=size)//make sure retrieving from pos that exists
+		pos=0;
+	return data[pos];
 }
 
 
 template <typename T>
-DataNode<T>::add(const T& add)
+void DataNode<T>::add(const T& add)
 {
 	if(size>=max_size)
 		increase();
-	data[size]=T;
-	++size;
+	data[this->size]=add;
+	++this->size;
 }
+
+#endif
