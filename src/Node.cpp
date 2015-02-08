@@ -6,14 +6,28 @@ Node::Node(int id)
 	next=nullptr;
 }
 
+Node::Node(const Node & cpy)
+{
+	id=cpy.id;
+	next=new Node(id);
+}
+
+Node::~Node()
+{
+	next=nullptr;
+}
+
 void Node::setNext(Node *next)
 {
 	this->next=next;
 }
 
+
+
+
 Node *Node::getNext() const
 {
-	return this->next;
+	return next;
 }
 
 int Node::getId()

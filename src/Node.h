@@ -8,6 +8,9 @@ class Node
 		Node * next;
 	public:
 		Node(int);
+		Node(const Node&);
+
+		virtual ~Node();
 
 		int getId();
 		Node *getNext() const;
